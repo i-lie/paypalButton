@@ -1,7 +1,7 @@
 <cfcomponent output="false" mixin="controller">
 
 	<cffunction name="init">
-		<cfset this.version = "1.1">
+		<cfset this.version = "1.1,1.1.8">
 		<cfreturn this>
 	</cffunction>
 
@@ -11,7 +11,7 @@
 					hint="Choose a button type. Options available are (_cart, _xclick, _donations, _oe-gift-certificate, _xclick-subscriptions).  More detail are available on the index.cfm.">
 
 		<cfargument name="cart" type="string" required="false" default="add"
-					hint="For shopping cart purchases only; these additional variables specify the kind of shopping cart button or command: add – Add to Cart buttons, display – View Cart buttons, upload – The Cart Upload command ">
+					hint="For shopping cart purchases only; these additional variables specify the kind of shopping cart button or command: add Add to Cart buttons, display View Cart buttons, upload The Cart Upload command ">
 
 		<cfargument name="shoppingUrl" type="string" required="false" default=""
 					hint="Enter the URL where recipients can shop and redeem this gift certificate.">
@@ -59,19 +59,19 @@
 					hint="Language for the submit button. Options available are (en, fr, es, de, nl, zh, ja, pt).  More detail are available on the index.cfm.">
 
 		<cfargument name="headerImage" type="string" required="false"
-					hint="The image at the top left of the checkout page. The image’s maximum size is 750 pixels wide by 90 pixels high. PayPal recommends that you provide an image that is stored only on a secure (https) server. More detail are available on the index.cfm.">
+					hint="The image at the top left of the checkout page. The images maximum size is 750 pixels wide by 90 pixels high. PayPal recommends that you provide an image that is stored only on a secure (https) server. More detail are available on the index.cfm.">
 
 		<cfargument name="return" type="string" required="false"
-					hint="The URL to which the payer’s browser is redirected after completing the payment; for example, a URL on your site that displays a 'Thank you for your payment' page.">
+					hint="The URL to which the payer's browser is redirected after completing the payment; for example, a URL on your site that displays a 'Thank you for your payment' page.">
 
 		<cfargument name="notifyUrl" type="string" required="false"
 					hint="The URL to which PayPal posts information about the transaction, in the form of Instant Payment Notification messages.">
 
 		<cfargument name="cancelReturn" type="string" required="false"
-					hint="A URL to which the payer’s browser is redirected if payment is cancelled; for example, a URL on your website that displays a “Payment Canceled” page.">
+					hint="A URL to which the payer's browser is redirected if payment is cancelled; for example, a URL on your website that displays a 'Payment Canceled'? page.">
 
 		<cfargument name="cbt" type="string" required="false"
-					hint="Sets the text for the Return to Merchant button on the PayPal Payment Complete page. For Business accounts, the return button displays your business name in place of the word “Merchant” by default. For Donate buttons, the text reads “Return to donations coordinator” by default.">
+					hint="Sets the text for the Return to Merchant button on the PayPal Payment Complete page. For Business accounts, the return button displays your business name in place of the word 'Merchant'? by default. For Donate buttons, the text reads 'Return to donations coordinator'? by default.">
 
 		<cfargument name="custom" type="string" required="false"
 					hint="Custom value as passed by you, the merchant. These are pass-through variables that are never presented to your customer. Length: 255 characters.">
@@ -89,7 +89,7 @@
 					hint="Subscription duration. Specify an integer value in the allowable range for the units of duration that you specify with t3. ">
 
 		<cfargument name="t3" type="string" required="false"
-					hint="Regular subscription units of duration. Allowable values:D – for days; allowable range for p3 is 1 to 90,W – for weeks; allowable range for p3 is 1 to 52,M – for months; allowable range for p3 is 1 to 24,Y – for years; allowable range for p3 is 1 to 5">
+					hint="Regular subscription units of duration. Allowable values:D - for days; allowable range for p3 is 1 to 90,W - for weeks; allowable range for p3 is 1 to 52,M - for months; allowable range for p3 is 1 to 24,Y - for years; allowable range for p3 is 1 to 5">
 
 		<cfargument name="buttonImage" type="string" required="false"
 					hint="Use custom button images that match the look of your website. Enter the url for the image.">
@@ -100,10 +100,10 @@
 		<cfargument name="debug" type="boolean" required="false" default="0"
 					hint="The debug will show you what to do if you miss some of the specific parameter requirements. Since some parameter only applies to some type of button. Try it you will see what I mean it won't hurt.">
 
-		<cfargument name="onLoadSubmit" type="boolean" required="false" default="0" 
+		<cfargument name="onLoadSubmit" type="boolean" required="false" default="0"
 				   	hint="Should it submit onLoad or not?">
 
-		<cfargument name="onLoadSubmitMessage" type="string" required="false" default="<p>You Are Being Automatically Redirected to PayPal</p>" 
+		<cfargument name="onLoadSubmitMessage" type="string" required="false" default="<p>You Are Being Automatically Redirected to PayPal</p>"
 				   	hint="Message to appear if you use the onLoadSubmit">
 
 		<cfset var loc = {}>
@@ -304,10 +304,10 @@
 					<cfif arguments.onLoadSubmit EQ 0>
 						<input type="image" src="#loc.imageSource#" border="0" name="submit" alt="#loc.langButtonAlt#">
 						<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
-					<cfelse>				
+					<cfelse>
 						#arguments.onLoadSubmitMessage#
-							
-						<script>document.paypalform.submit();</script>	
+
+						<script>document.paypalform.submit();</script>
 					</cfif>
 				</form>
 			</cfsavecontent>
@@ -402,10 +402,10 @@
 		<cfargument name="itemNumber" type="string" required="false"
 					hint="Enter the item number that you want to compare. If not identical it return 6.">
 
-		<cfargument name="currency" type="string" required="false" default="USD"
+		<cfargument name="currency" type="string" required="false"
 					hint="Enter the currency that you want to compare. If not identical it return 7.">
 
-		<cfargument name="receiverEmail" type="string" required="true"
+		<cfargument name="receiverEmail" type="string" required="false"
 					hint="Primary email address of the payment recipient (that is, the merchant). If the payment is sent to a non-primary email address on your PayPal account, the receiverEmail is still your primary email.">
 
 		<!---
@@ -436,37 +436,44 @@
 		 --->
 
 		<cfset var loc = {}>
+
 		<cfset loc.returnValue = "0">
-		<cfset loc.parameters="cmd=_notify-validate"><!---  The postback to PayPal must include the variable cmd with the value _notify-validat --->
+		<cfset loc.parameters = "cmd=_notify-validate">		<!---  The postback to PayPal must include the variable cmd with the value _notify-validat --->
 
 		<!--- The postback must include exactly the same variables and values that you receive in the
-		IPN from PayPal, and they must be in the same order otherwise it will return "INVALID"  --->
-		<cfloop list="#structKeyList(params)#" index="key">
-			<cfset loc.parameters = loc.parameters & "&#LCase(key)#=#URLEncodedFormat(params[key])#">
+			IPN from PayPal, and they must be in the same order otherwise it will return "INVALID"  --->
+		<cfloop list="#StructKeyList(form)#" index="loc.key" delimiters=",">
+			<cfset loc.parameters = loc.parameters & "&#LCase(loc.key)#=#URLEncodedFormat(form[loc.key])#">
 		</cfloop>
 
 		<cfif StructKeyExists(form, "payment_date")>
-		    <cfset loc.parameters = loc.parameters & "&payment_date=#URLEncodedFormat(Form.payment_date)#">
+		    <cfset loc.parameters = loc.parameters & "&payment_date=#URLEncodedFormat(form.payment_date)#">
 		</cfif>
 
 		<cfif StructKeyExists(form, "subscr_date")>
-		    <cfset loc.parameters = loc.parameters & "&subscr_date=#URLEncodedFormat(Form.subscr_date)#">
+		    <cfset loc.parameters = loc.parameters & "&subscr_date=#URLEncodedFormat(form.subscr_date)#">
 		</cfif>
 
+		<!--- get the paypal url --->
 		<cfif arguments.environmentActive>
 			<cfif get("environment") EQ "production">
-				<!--- PayPal will respond to the post with a single word, "VERIFIED" or "INVALID", in the body of the response. --->
-				<cfhttp url="https://www.paypal.com/cgi-bin/webscr?#loc.parameters#" method="get" resolveURL="false"></cfhttp>
+				<cfset loc.paypalUrl = getPaypalUrl(sandbox: false)>
 			<cfelse>
-				<cfhttp url="https://www.sandbox.paypal.com/cgi-bin/webscr?#loc.loc.parameters#" method="get" resolveURL="false"></cfhttp>
+				<cfset loc.paypalUrl = getPaypalUrl(sandbox: true)>
 			</cfif>
 		<cfelse>
 			<cfif arguments.environment EQ "production">
-				<cfhttp url="https://www.paypal.com/cgi-bin/webscr?#loc.parameters#" method="get" resolveURL="false"></cfhttp>
+				<cfset loc.paypalUrl = getPaypalUrl(sandbox: false)>
 			<cfelse>
-				<cfhttp url="https://www.sandbox.paypal.com/cgi-bin/webscr?#loc.parameters#" method="get" resolveURL="false"></cfhttp>
+				<cfset loc.paypalUrl = getPaypalUrl(sandbox: true)>
 			</cfif>
 		</cfif>
+
+		<!--- construct the ipn url --->
+		<cfset loc.paypalUrl = loc.paypalUrl & "?" & loc.parameters>
+
+		<!--- PayPal will respond to the post with a single word, "VERIFIED" or "INVALID", in the body of the response. --->
+		<cfhttp url="#loc.paypalUrl#" method="get" resolveUrl="false"></cfhttp>
 
 		<!--- check notification validation
 			When you receive a VERIFIED response, you need to perform several checks before fulfilling the order:
@@ -474,27 +481,28 @@
 			Validate that the "receiver_email" is an email address registered in your PayPal account, to prevent the payment from being sent to a fraudster's account
 			Check other transaction details such as the item number and price to confirm that the value has not been changed
 		--->
-		<cfif StructKeyExists(form, "payment_status") AND cfhttp.fileContent is "VERIFIED">
+		<cfif StructKeyExists(form, "payment_status") AND (cfhttp.fileContent is "VERIFIED")>
 
-			<cfset loc.returnValue = ""><!--- Since we know the return value is VERIFIED we can reset it.  Now lets perfom some other validation --->
+			<!--- Since we know the return value is VERIFIED we can reset it.  Now lets perfom some other validation --->
+			<cfset loc.returnValue = "">
 
 			<!--- check that receiver_email is your email address (arguments.business) --->
-			<cfif StructKeyExists(arguments, "receiverEmail") AND compare(form.receiver_email, arguments.receiverEmail) NEQ 0>
+			<cfif StructKeyExists(arguments, "receiverEmail") AND (Compare(form.receiver_email, arguments.receiverEmail) NEQ 0)>
 				<cfset loc.returnValue = listAppend(loc.returnValue, "2")>
 			</cfif>
 
 			<!--- check that form.mc_gross provided by PayPal is identical to the (arguments.price) --->
-			<cfif StructKeyExists(arguments, "price") AND compare(form.mc_gross, arguments.price) NEQ 0>
+			<cfif StructKeyExists(arguments, "price") AND (Compare(form.mc_gross, arguments.price) NEQ 0)>
 				<cfset loc.returnValue = listAppend(loc.returnValue, "3")>
 			</cfif>
 
 			<!--- check that form.item_number provided by PayPal is identical to the (arguments.itemNumber) --->
-			<cfif StructKeyExists(arguments, "itemNumber") AND StructKeyExists(form, "item_number") AND compare(form.item_number, arguments.itemNumber) NEQ 0>
+			<cfif StructKeyExists(arguments, "itemNumber") AND StructKeyExists(form, "item_number") AND (Compare(form.item_number, arguments.itemNumber) NEQ 0)>
 				<cfset loc.returnValue = listAppend(loc.returnValue, "4")>
 			</cfif>
 
 			<!--- check that form.mc_currency provided by PayPal is identical to the (arguments.currency) --->
-			<cfif compare(form.mc_currency, arguments.currency) NEQ 0>
+			<cfif StructKeyExists(arguments, "currency") AND (Compare(form.mc_currency, arguments.currency) NEQ 0)>
 				<cfset loc.returnValue = listAppend(loc.returnValue, "5")>
 			</cfif>
 
@@ -628,4 +636,13 @@
 
 	</cffunction>
 
+	<cffunction name="getPaypalUrl" access="public" returntype="string" output="false" hint="Get the paypal url.">
+		<cfargument name="sandbox" type="boolean" required="false" default="false" hint="Use the sandbox url?">
+
+		<cfif arguments.sandbox>
+			<cfreturn "https://www.sandbox.paypal.com/cgi-bin/webscr">
+		</cfif>
+
+		<cfreturn "https://www.paypal.com/cgi-bin/webscr">
+	</cffunction>
 </cfcomponent>

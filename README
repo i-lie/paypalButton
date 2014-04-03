@@ -1,6 +1,12 @@
-ColdFusion on Wheels plugin 
+# ColdFusion on Wheels plugin 
 Builds and returns a form using the PayPal HTML Variables for the Website Payments Standard
 
 
-Documentation 
+## Documentation 
 Available under the index.cfm file.
+
+## History
+
+### Version 0.6.3
+* Make the currency argument in verifyPaypalPayment function as optional
+* Bug fix: verifyPaypalPayment should check for form variables only when responding to PayPal IPN
